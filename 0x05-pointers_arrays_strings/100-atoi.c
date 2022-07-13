@@ -1,32 +1,27 @@
-#include <stdlib.h>
 #include "main.h"
-#include <limits.h>
-#include <string.h>
-
-int _atoi(char *str)
+/**
+ * _atoi - converts a string to an integer, truncate invalid char
+ * @s: string to convert
+ * Author: Chemizie Onwudiwe
+ * Return: value of integer
+ */
+int _atoi(char *s)
 {
-	int sign = 1, base = 0, i = 0;
+	int i, tmp, j, neg;
 
-	for (i = 0; str[i] != '\0' && (str[i] < '0' || str[i] > '9'); i++)
+	i = j = 0;
+	neg = 1;
+	while ((*(s + i) < '0' || *(s + i) > '9') && (*(s + i) != '\0'))
 	{
-		if (str[i] == '-' || str[i] == '+')
-			sign *= 1 - 2 * (str[i] == '-');
-		if (str[i + 1] == '\0')
-			return (0);
+		if (*(s + i) == '-')
+			neg *= -1;
+		i++;
 	}
-
-	while (str[i] >= '0' && str[i] <= '9')
+	tmp = i;
+	while ((*(s + tmp) >= '0') && (*(s + tmp) <= '9'))
 	{
-		if (base > INT_MAX / 10	|| (base == INT_MAX / 10
-			&& str[i] - '0' > 7))
-		{
-			if (sign == 1)
-				return (INT_MAX);
-			else
-				return (INT_MIN);
-		}
-		base = 10 * base + (str[i++] - '0');
+		j = j * 10 + neg * (*(s + tmp) - '0');
+		tmp++;
 	}
-
-	return (base * sign);
+	return (j);
 }
