@@ -1,17 +1,25 @@
-#include <string.h>
 #include "main.h"
-
-void rev_string(char *str)
+/**
+ * rev_string - reverses a string
+ * @s: string pointer to be reversed
+ * Author: Chimezie Onwudiwe
+ * Returns: void.
+ */
+void rev_string(char *s)
 {
-	int i = strlen(str) - 1, j = 0;
-	char tmp;
+	int i = 0, j = 0;
+	char tmp[1000];
 
-	while (i > j)
+	while (*(s + i))
 	{
-		tmp = str[i];
-		str[i] = str[j];
-		str[j] = tmp;
-		i--;
+		*(tmp + i) = *(s + i);
+		i++;
+	}
+	i = i - 1;
+	while (i >= 0)
+	{
+		*(s + i) = *(tmp + j);
 		j++;
+		i--;
 	}
 }
